@@ -26,8 +26,7 @@
 
 #include <wfcDisplay.h>
 
-
-
+/*-------------------------- Global variables ----------------------------*/
 struct Data_for_open
 {
 	int file_version = 0;
@@ -40,7 +39,8 @@ xstring suffic_filter = "*" + suffic;
 
 /*-------------------------- Function prototypes ----------------------------*/
 extern "C" int open_drw();
-int open_drw_sp();
+extern "C" int open_drw_sp();
+extern "C" int open_drw_base(bool isspec);
 int random_color();
 Data_for_open ParserPathandName(xstringsequence_ptr& files, xstring &dir, xstring &model_name);
 
@@ -51,9 +51,9 @@ static ofstream logFile;
 extern "C" int user_initialize()
 {
 	ProError perr = PRO_TK_NO_ERROR;
-	uiCmdCmdId   cmd_id;
+	uiCmdCmdId cmd_id;
 
-	/*button creation*/
+	/*button open_drw*/
 	perr = ProCmdActionAdd("Toolkit_Issue",
 		(uiCmdCmdActFn) open_drw,
 		uiProeImmediate , NULL, PRO_B_TRUE,
@@ -72,7 +72,7 @@ extern "C" int user_initialize()
 		NULL, PRO_B_TRUE, cmd_id,
 		msgfil);
 
-	/*button creation*/
+	/*button open_drw_sp*/
 	perr = ProCmdActionAdd("Toolkit_Issue2",
 		(uiCmdCmdActFn)open_drw_sp,
 		uiProeImmediate, NULL, PRO_B_TRUE,
@@ -137,130 +137,61 @@ extern "C" int user_initialize()
 /* function called when pressing user-defined button toolkit_issue           */
 /*---------------------------------------------------------------------------*/
 
-extern "C" int open_drw ()
+int open_drw_base(bool isspec)
 {
 	Data_for_open open;
-
 	Settings settings = LoadSettings();
-	
-	try	{
-			pfcSession_ptr Session = pfcGetProESession();
-			
-			//show in graphics: 
-			pfcModelDescriptor_ptr desc = NULL;
 
-			pfcModel_ptr model = Session->GetCurrentModel();
-			xstring dir = Session->GetCurrentDirectory();
+	try {
+		pfcSession_ptr Session = pfcGetProESession();
 
-			if (model != NULL) {
-				xstring model_name = model->GetFullName();
-				xstring generic_name = model->GetGenericName();
-				if (!generic_name.IsEmpty()){ // check the model is not an instance
-					model_name = generic_name;
-				}
-				xstring temp_name;
+		//show in graphics: 
+		pfcModelDescriptor_ptr desc = NULL;
 
+		pfcModel_ptr model = Session->GetCurrentModel();
+		xstring dir = Session->GetCurrentDirectory();
+
+		if (model != NULL) {
+			xstring temp_name;
+			xstring model_name = model->GetFullName();
+			xstring generic_name = model->GetGenericName();
+
+			// check the model is not an instance
+			if (!generic_name.IsEmpty()) { 
+				model_name = generic_name;
+			}
+			if (!isspec) {
 				if (model_name.Match("*" + settings.suff_sp)) {
 					temp_name = model_name.Substring(0, model_name.GetLength() - settings.suff_sp.GetLength());
 				}
 				else {
 					temp_name = model_name;
 				}
-
-				//list file drw current dir
-
-				xstringsequence_ptr files = Session->ListFiles(suffic_filter, pfcFILE_LIST_LATEST, dir);
-				open = ParserPathandName(files, dir, temp_name);
-				if (open.file_version != 0 || settings.subdir) {
-					if (settings.subdir) {
-						//list sudir
-						xstringsequence_ptr subdir = Session->ListSubdirectories(dir);
-						for (xint i = 0; i < subdir->getarraysize(); ++i) {
-							xstringsequence_ptr temp_files = Session->ListFiles(suffic_filter, pfcFILE_LIST_LATEST, subdir->get(i));
-							if (temp_files->getarraysize() > 0) {
-								xstring tmp = subdir->get(i);
-								Data_for_open temp_open = ParserPathandName(temp_files, tmp, temp_name);
-								if (temp_open.file_version > open.file_version) {
-									open.file_version = temp_open.file_version;
-									open.dir_for_open = temp_open.dir_for_open;
-								}
-							}
-						}
-					}
-
-					model_name = temp_name + suffic;
-
-					try {
-						Session->ChangeDirectory(open.dir_for_open);
-						desc = pfcModelDescriptor::CreateFromFileName(model_name);
-						Session->OpenFile(desc)->Activate();
-					}
-					xcatchbegin
-						xcatch(pfcXInvalidFileName, xfn)
-
-						return wfcTK_INVALID_FILE;
-					xcatch(pfcXUnknownModelExtension, xume)
-
-						return wfcTK_INVALID_FILE;
-					xcatchend
-
-					Session->ChangeDirectory(dir);
-				}
-				else {
-					Session->UIDisplayLocalizedMessage("message.txt", "messageNorDRW", NULL);
-				}
 			}
-		}
-
-		xcatchbegin
-			xcatchcip(Ex)
-			xcatchend
-
-	return(0); 
-} 
-
-int open_drw_sp()
-{
-	Settings settings = LoadSettings();
-	
-	try {
-		Data_for_open open;
-		pfcSession_ptr Session = pfcGetProESession();
-
-		//show in graphics: 
-		pfcModelDescriptor_ptr desc = NULL;
-		pfcModel_ptr model = Session->GetCurrentModel();
-		xstring dir = Session->GetCurrentDirectory();
-
-		if (model) {
-			xstring model_name = model->GetFullName();
-			xstring generic_name = model->GetGenericName();
-			if (!generic_name.IsEmpty()) {
-				model_name = generic_name;
+			else {
+				temp_name = model_name + settings.suff_sp.ToUpper();
 			}
-			xstring temp_name;
-			model_name += settings.suff_sp.ToUpper();
 
+			//list file drw current dir
 			xstringsequence_ptr files = Session->ListFiles(suffic_filter, pfcFILE_LIST_LATEST, dir);
-			open = ParserPathandName(files, dir, model_name);
-			if (open.file_version != 0 || settings.subdir) {
-				if (settings.subdir) {
-					//list sudir
-					xstringsequence_ptr subdir = Session->ListSubdirectories(dir);
-
-					for (xint i = 0; i < subdir->getarraysize(); ++i) {
-						xstringsequence_ptr temp_files = Session->ListFiles(suffic_filter, pfcFILE_LIST_LATEST, subdir->get(i));
-						if (temp_files->getarraysize() > 0) {
-							xstring tmp = subdir->get(i);
-							Data_for_open temp_open = ParserPathandName(temp_files, tmp, model_name);
-							if (temp_open.file_version > open.file_version) {
-								open.file_version = temp_open.file_version;
-								open.dir_for_open = temp_open.dir_for_open;
-							}
+			open = ParserPathandName(files, dir, temp_name);
+			if (settings.subdir) {
+				//list sudir
+				xstringsequence_ptr subdir = Session->ListSubdirectories(dir);
+				for (xint i = 0; i < subdir->getarraysize(); ++i) {
+					xstringsequence_ptr temp_files = Session->ListFiles(suffic_filter, pfcFILE_LIST_LATEST, subdir->get(i));
+					if (temp_files->getarraysize() > 0) {
+						xstring tmp = subdir->get(i);
+						Data_for_open temp_open = ParserPathandName(temp_files, tmp, temp_name);
+						if (temp_open.file_version > open.file_version) {
+							open.file_version = temp_open.file_version;
+							open.dir_for_open = temp_open.dir_for_open;
 						}
 					}
 				}
-				model_name += suffic;
+			}
+			if (open.file_version != 0) {
+				model_name = temp_name + suffic;
 				try {
 					Session->ChangeDirectory(open.dir_for_open);
 					desc = pfcModelDescriptor::CreateFromFileName(model_name);
@@ -282,11 +213,24 @@ int open_drw_sp()
 			}
 		}
 	}
+
 	xcatchbegin
 		xcatchcip(Ex)
 		xcatchend
-		return(0);
+	return 0;
 }
+
+
+extern "C" int open_drw ()
+{
+	return open_drw_base(false);
+} 
+
+extern "C" int open_drw_sp()
+{
+	return open_drw_base(true);
+}
+
 
 int random_color()
 {

@@ -1,7 +1,6 @@
 #include "rw_file.h"
 #include <iostream>
 
-
 Settings LoadSettings()
 {
 	std::fstream file;
