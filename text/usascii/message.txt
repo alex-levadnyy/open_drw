@@ -1,0 +1,28 @@
+﻿Toolkit Menu
+Open DRW
+#
+#
+Toolkit Button
+Open DRW
+#
+#
+Toolkit Button1
+Open BOM
+#
+#
+Toolkit Button2
+Settings
+#
+#
+Toolkit Button3
+Rundom color
+#
+#
+messageNorDRW
+No drawing for this model
+#
+#
+SettingsSaved
+Settings have been saved
+#
+#
