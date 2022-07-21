@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="text">
+      <UniqueIdentifier>{f774301d-a8a2-40e0-98d7-52645b8b12fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="text\resource">
+      <UniqueIdentifier>{428ac48f-4175-4bf2-a902-0d10f7afe4d4}</UniqueIdentifier>
+      <Extensions>*.res;*.bif</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Creo Registry File">
+      <UniqueIdentifier>{4dea868b-cd2e-4f82-8384-6565d21744da}</UniqueIdentifier>
+      <Extensions>*.dat</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+    <Text Include="..\text\resource\activate16x16.bif" />
+    <Text Include="..\text\resource\left_arrow_9x13.bif" />
+    <Text Include="..\text\resource\orientation.bif" />
+    <Text Include="..\text\resource\rep_def_env.bif" />
+    <Text Include="..\text\resource\section_show_capped_16x16.bif" />
+    <Text Include="..\text\resource\update20x20.bif" />
+    <Text Include="..\text\resource\view_manager.bif" />
+    <Text Include="..\text\resource\view_options.bif" />
+    <Text Include="..\text\resource\pane_layout.res" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\creotk.dat">
+      <Filter>Creo Registry File</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="$(SolutionDir)\view_tree.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="toolkit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ui_config.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rw_file.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ui_config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rw_file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

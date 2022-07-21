@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E11F32A1-4E77-4578-BD39-DB9F8F5D235B}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>otk_view_tree_app</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>open_drw</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PlatformToolset>v140</PlatformToolset>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>
+    </LinkIncremental>
+    <IncludePath>$(CREO_INSTALL)\otk\otk_cpp\include;.;$(CREO_INSTALL)\protoolkit\includes;$(IncludePath)</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
+    <ExtensionsToDeleteOnClean>*.lib;$(ExtensionsToDeleteOnClean)</ExtensionsToDeleteOnClean>
+    <LibraryWPath>$(WindowsSDK_MetadataPath);</LibraryWPath>
+    <ExcludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(MSBuild_ExecutablePath);$(VC_LibraryPath_x64);</ExcludePath>
+    <ExecutablePath>$(VC_ExecutablePath_x64);$(WindowsSdk_71A_ExecutablePath);$(WindowsSDK_ExecutablePath);$(VS_ExecutablePath);$(MSBuild_ExecutablePath);$(FxCopDir);$(PATH);</ExecutablePath>
+    <IntDir />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(CREO_INSTALL)\otk\otk_cpp\include;.;$(CREO_INSTALL)\protoolkit\includes;$(IncludePath)</IncludePath>
+    <LinkIncremental>
+    </LinkIncremental>
+    <ExtensionsToDeleteOnClean>*.lib;$(ExtensionsToDeleteOnClean)</ExtensionsToDeleteOnClean>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <PreprocessorDefinitions>PRO_USE_VAR_ARGS;PRO_MACHINE=36;PRO_OS=4;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <OptimizeReferences>false</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(CREO_INSTALL)/otk/otk_cpp/x86e_win64/obj;$(CREO_INSTALL)/protoolkit/x86e_win64/obj;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>otk_cpp.lib;otk_222.lib;protk_dll_NU.lib;ucore.lib;udata.lib;netapi32.lib;wsock32.lib;psapi.lib;mpr.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>
+      </LinkTimeCodeGeneration>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalOptions>
+      </AdditionalOptions>
+      <ProgramDatabaseFile />
+      <MinimumRequiredVersion>5.02</MinimumRequiredVersion>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>
+      </Optimization>
+      <PreprocessorDefinitions>USE_ANSI_IOSTREAMS;PRO_USE_VAR_ARGS;PRO_MACHINE=36;PRO_OS=4;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeaderFile />
+      <PrecompiledHeaderOutputFile />
+      <PrecompiledHeader />
+      <DisableLanguageExtensions />
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(CREO_INSTALL)/otk/otk_cpp/x86e_win64/obj;$(CREO_INSTALL)/protoolkit/x86e_win64/obj;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>otk_cpp.lib;otk_222.lib;protk_dll_NU.lib;ucore.lib;udata.lib;netapi32.lib;wsock32.lib;psapi.lib;mpr.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SuppressStartupBanner />
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+    </Link>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\creotk.dat">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+    </None>
+    <Text Include="..\text\resource\activate16x16.bif">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+      <FileType>Document</FileType>
+    </Text>
+    <Text Include="..\text\resource\left_arrow_9x13.bif">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+      <FileType>Document</FileType>
+    </Text>
+    <Text Include="..\text\resource\orientation.bif">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+      <FileType>Document</FileType>
+    </Text>
+    <Text Include="..\text\resource\rep_def_env.bif">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+      <FileType>Document</FileType>
+    </Text>
+    <Text Include="..\text\resource\section_show_capped_16x16.bif">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+      <FileType>Document</FileType>
+    </Text>
+    <Text Include="..\text\resource\update20x20.bif">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+      <FileType>Document</FileType>
+    </Text>
+    <Text Include="..\text\resource\view_manager.bif">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+      <FileType>Document</FileType>
+    </Text>
+    <Text Include="..\text\resource\view_options.bif">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+      <FileType>Document</FileType>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\text\resource\pane_layout.res">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="$(SolutionDir)\view_tree.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="rw_file.cpp" />
+    <ClCompile Include="toolkit.cpp" />
+    <ClCompile Include="ui_config.cxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="rw_file.h" />
+    <ClInclude Include="ui_config.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
