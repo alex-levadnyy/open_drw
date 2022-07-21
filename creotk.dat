@@ -1,0 +1,9 @@
+name OpenDrw
+startup dll
+#toolkit object
+#creo_type direct
+exec_file D:\rabota\2022\creo\from_git\otk_view_tree_app\x64\Release\open_drw.dll
+text_dir D:\rabota\2022\creo\from_git\otk_view_tree_app\text
+allow_stop true
+delay_start false
+end
