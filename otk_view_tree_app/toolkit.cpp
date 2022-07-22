@@ -41,7 +41,6 @@ xstring suffic_filter = "*" + suffic;
 extern "C" int open_drw();
 extern "C" int open_drw_sp();
 extern "C" int open_drw_base(bool isspec);
-int random_color();
 Data_for_open ParserPathandName(xstringsequence_ptr& files, xstring &dir, xstring &model_name);
 
 /*-------------------------- Application defines ----------------------------*/
@@ -108,28 +107,7 @@ extern "C" int user_initialize()
 		"Toolkit Menu", "Toolkit Button2",
 		"Toolkit Button2", "Toolkit Button2",
 		NULL, PRO_B_TRUE, cmd_id,
-		msgfil);
-
-	/*button config*/
-	/*perr = ProCmdActionAdd("Toolkit_Issue4",
-		(uiCmdCmdActFn)random_color,
-		uiProeImmediate, NULL, PRO_B_TRUE,
-		PRO_B_TRUE, &cmd_id);
-
-	perr = ProCmdDesignate(cmd_id, "Toolkit Button3", "Toolkit Button3", "Toolkit Button3", msgfil);
-
-	perr = ProCmdIconSet(cmd_id, "sma4.gif");
-
-	perr = ProMenubarMenuAdd(
-		"Toolkit Menu", "Toolkit Menu", "Help",
-		PRO_B_TRUE, msgfil);
-	perr = ProMenubarmenuPushbuttonAdd(
-		"Toolkit Menu", "Toolkit Button3",
-		"Toolkit Button3", "Toolkit Button3",
-		NULL, PRO_B_TRUE, cmd_id,
-		msgfil);*/
-
-
+		msgfil);	
 	return (0);
 }
 
@@ -229,50 +207,6 @@ extern "C" int open_drw ()
 extern "C" int open_drw_sp()
 {
 	return open_drw_base(true);
-}
-
-
-int random_color()
-{
-	wfcWSession_ptr Session;
-	try {
-		logFile.open("log.txt", ios::out);
-		Session = wfcWSession::cast(pfcGetProESession());
-		pfcModel_ptr model = Session->GetCurrentModel();
-		wfcWAssembly_ptr wAssembly = wfcWAssembly::cast(model);
-
-		wfcWComponentPaths_ptr wDispComps = wAssembly->ListDisplayedComponents();
-
-		if (NULL != wDispComps)
-		{
-			
-			xint wDispCompsSize = wDispComps->getarraysize();
-
-			logFile << "\t - There are " << wDispCompsSize
-				<< " Displayed Components in the assembly." << endl;
-
-			for (int Idx = 0; Idx < wDispCompsSize; Idx++)
-			{
-				pfcSolid_ptr cd = (wDispComps->get(Idx))->GetLeaf();
-				wfcWSolid_ptr x = wfcWSolid::cast(cd);
-				wfcAppearances_ptr as = wfcAppearances::cast(x);
-				as->get(0)->SetRGBColor(pfcColorRGB::Create(100,100,100));
-				//xstring wFileName = ((wDispComps->get(Idx))->GetLeaf())->GetFileName();
-				xstring wFileName = cd->GetFileName();
-				logFile << "\t - Displayed Component [" << Idx << "] = "
-					<< wFileName << endl;
-			}
-		}
-		
-	}
-
-
-	xcatchbegin
-		xcatchcip(Ex)
-		xcatchend
-
-	logFile.close();
-	return 0;
 }
 
 Data_for_open ParserPathandName(xstringsequence_ptr& files, xstring &dir, xstring &model_name)
