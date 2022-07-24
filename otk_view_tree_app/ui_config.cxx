@@ -72,8 +72,8 @@ void GetSettinds()
 	uifcInputPanel_ptr inputpanel1 = uifcInputPanelFind(UI_CONFIG_DIALOG, UI_CONFIG_INPUTPANEL1);
 	bool recursive_search;
 	checkbutton1->GetCheckedState() == uifcCHECK_STATE_SET ? recursive_search = true : recursive_search = false;
-	xstring syffic = inputpanel1->GetTextValue();
-	SaveSettings(recursive_search, syffic);
+	xstring suffix = inputpanel1->GetTextValue();
+	SaveSettings(recursive_search, suffix);
 
 }
 

@@ -41,7 +41,7 @@ Settings LoadSettings()
 	return settings;
 }
 
-void SaveSettings(bool recursive_search, xstring syffix)
+void SaveSettings(bool recursive_search, xstring suffix)
 {
 	std::fstream file;
 	wfcWSession_ptr ses;
@@ -53,8 +53,8 @@ void SaveSettings(bool recursive_search, xstring syffix)
 		xcatchcip(Ex)
 		xcatchend
 
-	if (syffix.IsEmpty()) {
-		syffix = "empty";
+	if (suffix.IsEmpty()) {
+		suffix = "empty";
 	}	
 
 	xstring path = ses->GetApplicationPath();
@@ -68,7 +68,7 @@ void SaveSettings(bool recursive_search, xstring syffix)
 		file << std::boolalpha;
 		file << "1" << std::endl
 			<< recursive_search << std::endl
-			<< syffix.ToUpper();
+			<< suffix.ToUpper();
 	}
 	ses->UIDisplayLocalizedMessage("message.txt", "SettingsSaved", NULL);
 }
