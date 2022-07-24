@@ -15,11 +15,15 @@ Toolkit Button2
 #
 #
 Toolkit Button3
-Раскрасить случайным цветом
+Печать TIFF
 #
 #
 messageNorDRW
 Нет чертежа этой модели
+#
+#
+SettingsSaved
+Настройки сохранены
 #
 #
 SettingsSaved
